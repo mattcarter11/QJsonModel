@@ -1,6 +1,6 @@
 """Python adaptation of https://github.com/dridk/QJsonModel
 
-Supports Python 2 and 3 with PySide, PySide2, PyQt4 or PyQt5.
+Supports Python 2 and 3 with PySide6
 Requires https://github.com/mottosso/Qt.py
 
 Usage:
@@ -39,8 +39,7 @@ Changes:
 
 import json
 
-from Qt import QtWidgets, QtCore, __binding__
-
+from PySide6 import QtWidgets, QtCore
 
 class QJsonTreeItem(object):
     def __init__(self, parent=None):
@@ -194,11 +193,6 @@ class QJsonModel(QtCore.QAbstractItemModel):
                 item = index.internalPointer()
                 item.value = str(value)
 
-                if __binding__ in ("PySide", "PyQt4"):
-                    self.dataChanged.emit(index, index)
-                else:
-                    self.dataChanged.emit(index, index, [QtCore.Qt.EditRole])
-
                 return True
 
         return False
@@ -325,4 +319,4 @@ if __name__ == '__main__':
 
     view.show()
     view.resize(500, 300)
-    app.exec_()
+    app.exec()
